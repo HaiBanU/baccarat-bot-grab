@@ -1,9 +1,8 @@
-# file: main_bot_grab.py (PHIÊN BẢN WEB SERVER CHO BOT "TÚ GRAB")
+# file: main_bot_grab.py (PHIÊN BẢN SỬA LỖI HOÀN CHỈNH)
 
 import telegram
 import asyncio
 import random
-import time
 import os
 import threading
 from flask import Flask
@@ -22,7 +21,6 @@ TIME_WINDOWS = {
     "evening": (20, 23), "late_night": (23, 2), "interaction": (0, 23),
     "experience_motivation": (0, 23)
 }
-# DÒNG ĐỂ TEST
 MESSAGE_INTERVAL_MINUTES = (18, 45)
 AVOID_LAST_N_MESSAGES = 50
 
@@ -41,24 +39,23 @@ recent_messages = {
 def get_unique_random_message(category):
     possible_messages = SCENARIOS_GRAB.get(category, [])
     if not possible_messages: return None
-    # Cố gắng tìm một tin nhắn chưa gửi gần đây
     for _ in range(len(possible_messages)):
         message = random.choice(possible_messages)
         if message not in recent_messages[category]:
             recent_messages[category].append(message)
             return message
-    # Nếu tất cả đã được gửi, trả về một tin ngẫu nhiên
     return random.choice(possible_messages)
 
 async def send_message(message):
     try:
         await bot.send_message(chat_id=CHAT_ID, text=message)
-        print(f"✅ [TÚ GRAB] [{datetime.now().strftime('%H:%M:%S')}] Đã gửi: {message}")
+        print(f"✅ [TÚ GRAB] [{datetime.now().strftime('%H:%M:%S')}] Đã gửi: {message[:70]}...") # In ngắn gọn
     except Exception as e:
         print(f"❌ [TÚ GRAB] Lỗi khi gửi tin nhắn: {e}")
 
-def run_bot_logic():
-    print("[TÚ GRAB] Logic của Bot 'Tú Grab' đang khởi động...")
+# <<< THAY ĐỔI 1: Chuyển toàn bộ logic bot sang hàm async >>>
+async def bot_main_loop():
+    print("▶️  [TÚ GRAB] Logic của Bot 'Tú Grab' đang khởi động...")
     next_send_time = {}
     for category in SCENARIOS_GRAB.keys():
         delay = random.randint(MESSAGE_INTERVAL_MINUTES[0], MESSAGE_INTERVAL_MINUTES[1])
@@ -71,30 +68,40 @@ def run_bot_logic():
             in_window = False
             if start_hour <= end_hour:
                 if start_hour <= current_hour <= end_hour: in_window = True
-            else: # Xử lý cho khung giờ qua đêm (ví dụ: 23h - 2h)
+            else: 
                 if current_hour >= start_hour or current_hour <= end_hour: in_window = True
             
             if in_window and now >= next_send_time.get(category, now):
                 message = get_unique_random_message(category)
                 if message:
-                    asyncio.run(send_message(message))
+                    # <<< THAY ĐỔI 2: Dùng await thay vì asyncio.run() >>>
+                    await send_message(message)
+                
                 delay = random.randint(MESSAGE_INTERVAL_MINUTES[0], MESSAGE_INTERVAL_MINUTES[1])
                 next_send_time[category] = now + timedelta(minutes=delay)
-                time.sleep(random.randint(3, 8)) # Thêm độ trễ ngẫu nhiên nhỏ
-        time.sleep(10)
+                
+                # <<< THAY ĐỔI 3: Dùng asyncio.sleep() thay vì time.sleep() >>>
+                await asyncio.sleep(random.randint(3, 8))
+        
+        await asyncio.sleep(10)
+
+def run_flask_server():
+    port = int(os.environ.get('PORT', 10002))
+    print(f"🌐 [TÚ GRAB] Khởi động máy chủ web trên cổng {port}...")
+    app.run(host='0.0.0.0', port=port)
 
 if __name__ == "__main__":
     print("🚀 [TÚ GRAB] Script bắt đầu thực thi...")
-    
-    # Kiểm tra các biến môi trường quan trọng
+
     if not BOT_TOKEN or not CHAT_ID:
         print("❌ [TÚ GRAB] LỖI NGHIÊM TRỌNG: Thiếu BOT_TOKEN hoặc CHAT_ID trong biến môi trường!")
     else:
         print("✅ [TÚ GRAB] Biến môi trường đã được tải.")
-        bot_thread = threading.Thread(target=run_bot_logic)
+        
+        # <<< THAY ĐỔI 4: Khởi động bot theo đúng chuẩn (giống bot Thư Ký Tiên) >>>
+        bot_thread = threading.Thread(target=lambda: asyncio.run(bot_main_loop()))
         bot_thread.daemon = True
         bot_thread.start()
 
-    port = int(os.environ.get('PORT', 10002))
-    print(f"🌐 [TÚ GRAB] Khởi động máy chủ web trên cổng {port}...")
-    app.run(host='0.0.0.0', port=port)
+    # Chạy Flask trong luồng chính
+    run_flask_server()
