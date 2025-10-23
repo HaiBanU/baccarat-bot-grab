@@ -84,9 +84,17 @@ def run_bot_logic():
         time.sleep(10)
 
 if __name__ == "__main__":
-    bot_thread = threading.Thread(target=run_bot_logic)
-    bot_thread.daemon = True
-    bot_thread.start()
+    print("🚀 [TÚ GRAB] Script bắt đầu thực thi...")
+    
+    # Kiểm tra các biến môi trường quan trọng
+    if not BOT_TOKEN or not CHAT_ID:
+        print("❌ [TÚ GRAB] LỖI NGHIÊM TRỌNG: Thiếu BOT_TOKEN hoặc CHAT_ID trong biến môi trường!")
+    else:
+        print("✅ [TÚ GRAB] Biến môi trường đã được tải.")
+        bot_thread = threading.Thread(target=run_bot_logic)
+        bot_thread.daemon = True
+        bot_thread.start()
 
     port = int(os.environ.get('PORT', 10002))
+    print(f"🌐 [TÚ GRAB] Khởi động máy chủ web trên cổng {port}...")
     app.run(host='0.0.0.0', port=port)
