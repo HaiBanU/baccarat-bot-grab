@@ -1,4 +1,4 @@
-# file: main_bot_grab.py (PHIÊN BẢN SỬA LỖI HOÀN CHỈNH)
+# file: main_bot_grab.py (PHIÊN BẢN GIỚI HẠN GIỜ HOẠT ĐỘNG)
 
 import telegram
 import asyncio
@@ -16,10 +16,15 @@ load_dotenv()
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 CHAT_ID = os.getenv("CHAT_ID")
 
+# <<< THAY ĐỔI 1: CẬP NHẬT LẠI CÁC KHUNG GIỜ HOẠT ĐỘNG >>>
 TIME_WINDOWS = {
-    "morning": (7, 10), "noon": (12, 14), "afternoon": (16, 18),
-    "evening": (20, 23), "late_night": (23, 2), "interaction": (0, 23),
-    "experience_motivation": (0, 23)
+    "morning": (7, 10),         # Bắt đầu từ 7h
+    "noon": (12, 14),
+    "afternoon": (16, 18),
+    "evening": (20, 23),
+    "late_night": (23, 23),      # Chỉ hoạt động trong khung 23h
+    "interaction": (7, 23),      # Hoạt động từ 7h đến 23h
+    "experience_motivation": (7, 23) # Hoạt động từ 7h đến 23h
 }
 MESSAGE_INTERVAL_MINUTES = (18, 45)
 AVOID_LAST_N_MESSAGES = 50
@@ -53,7 +58,6 @@ async def send_message(message):
     except Exception as e:
         print(f"❌ [TÚ GRAB] Lỗi khi gửi tin nhắn: {e}")
 
-# <<< THAY ĐỔI 1: Chuyển toàn bộ logic bot sang hàm async >>>
 async def bot_main_loop():
     print("▶️  [TÚ GRAB] Logic của Bot 'Tú Grab' đang khởi động...")
     next_send_time = {}
@@ -64,25 +68,32 @@ async def bot_main_loop():
     while True:
         now = datetime.now()
         current_hour = now.hour
+        current_minute = now.minute
+
+        # <<< THAY ĐỔI 2: THÊM LOGIC "NGỦ" CHO BOT >>>
+        # Bot sẽ "ngủ" từ 23:31 đến 06:59 sáng hôm sau
+        is_sleeping_time = (current_hour == 23 and current_minute > 30) or current_hour < 7
+        if is_sleeping_time:
+            print(f"😴 [TÚ GRAB] [{now.strftime('%H:%M:%S')}] Bot đang trong giờ nghỉ ngơi... Sẽ kiểm tra lại sau 1 phút.")
+            await asyncio.sleep(60) # Tạm dừng 1 phút rồi kiểm tra lại
+            continue # Bỏ qua vòng lặp hiện tại và bắt đầu lại
+
         for category, (start_hour, end_hour) in TIME_WINDOWS.items():
             in_window = False
             if start_hour <= end_hour:
                 if start_hour <= current_hour <= end_hour: in_window = True
-            else: 
+            else:
                 if current_hour >= start_hour or current_hour <= end_hour: in_window = True
-            
+
             if in_window and now >= next_send_time.get(category, now):
                 message = get_unique_random_message(category)
                 if message:
-                    # <<< THAY ĐỔI 2: Dùng await thay vì asyncio.run() >>>
                     await send_message(message)
-                
+
                 delay = random.randint(MESSAGE_INTERVAL_MINUTES[0], MESSAGE_INTERVAL_MINUTES[1])
                 next_send_time[category] = now + timedelta(minutes=delay)
-                
-                # <<< THAY ĐỔI 3: Dùng asyncio.sleep() thay vì time.sleep() >>>
                 await asyncio.sleep(random.randint(3, 8))
-        
+
         await asyncio.sleep(10)
 
 def run_flask_server():
@@ -97,8 +108,6 @@ if __name__ == "__main__":
         print("❌ [TÚ GRAB] LỖI NGHIÊM TRỌNG: Thiếu BOT_TOKEN hoặc CHAT_ID trong biến môi trường!")
     else:
         print("✅ [TÚ GRAB] Biến môi trường đã được tải.")
-        
-        # <<< THAY ĐỔI 4: Khởi động bot theo đúng chuẩn (giống bot Thư Ký Tiên) >>>
         bot_thread = threading.Thread(target=lambda: asyncio.run(bot_main_loop()))
         bot_thread.daemon = True
         bot_thread.start()
