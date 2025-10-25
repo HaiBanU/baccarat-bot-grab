@@ -32,7 +32,12 @@ SCENARIOS_GRAB = {
         "Em đi chạy đây, có kèo nào thơm hú em với nhé mọi người.",
         "Thắng được một chút thôi mà vui cả ngày. Cảm ơn cuộc đời đã cho em biết đến nhóm.",
         "Em chỉ là một thằng nhóc chạy Grab, nhưng ở đây em cảm thấy mình được tôn trọng.",
-        "Hôm nay nhất định phải là một ngày may mắn, vì em có mọi người đồng hành."
+        "Hôm nay nhất định phải là một ngày may mắn, vì em có mọi người đồng hành.",
+        "6h30 sáng em đã có mặt, chào cả nhà. Chúc anh em ngày mới bội thu, cuốc nổ đều đều, kèo về đầy túi.",
+        "Em vừa làm cuốc xe ôm sớm cho chị gái đi chợ. Có tiền đổ xăng rồi, giờ vào kiếm tiền ăn sáng với anh em.",
+        "Sương sớm còn chưa tan em đã phải ra đường rồi. Nhưng cứ nghĩ đến nhóm là lại có động lực.",
+        "Bữa sáng quan trọng lắm, mà bữa sáng có thêm tiền từ nhóm thì còn tuyệt vời hơn.",
+        "Em đặt báo thức từ 5h sáng, nhưng 6h30 mới vào nhóm vì sợ làm phiền mọi người. Chúc cả nhà ngày mới tốt lành!"
     ],
     # --- Kịch bản buổi trưa: Tranh thủ nghỉ ngơi, kiếm thêm tiền cơm ---
     "noon": [
@@ -55,7 +60,12 @@ SCENARIOS_GRAB = {
         "Số tiền nhỏ với mọi người nhưng với em là cả một bữa ăn ngon.",
         "Cảm ơn vì đã không chỉ cho em con cá, mà còn dạy em cách câu.",
         "Em sẽ không bao giờ quên những ngày tháng khó khăn và sự giúp đỡ của nhóm.",
-        "Nạp năng lượng xong rồi, em lại lên đường. Chúc anh em buổi chiều may mắn."
+        "Nạp năng lượng xong rồi, em lại lên đường. Chúc anh em buổi chiều may mắn.",
+        "Nắng Sài Gòn giữa trưa đúng là đặc sản. Em xin phép nghỉ lát làm vài tay kiếm bữa trưa mát ruột.",
+        "Vừa giao xong đơn hàng đồ ăn cho khách mà bụng mình thì đói cồn cào. May có nhóm cứu đói bữa trưa.",
+        "Anh em nào chạy Grab giống em không, nghỉ trưa tìm gốc cây nào mát mát rồi vào nhóm là hết bài.",
+        "Bữa trưa nay em tự thưởng cho mình ly trà tắc. Tiền từ kèo thắng sáng nay đó ạ.",
+        "Tranh thủ chợp mắt 15 phút, nhưng vẫn phải đặt chuông để không lỡ kèo ngon của nhóm."
     ],
     # --- Kịch bản chiều & tối: Sau một ngày làm, gỡ gạc và kiếm thêm ---
     "afternoon": [
@@ -78,7 +88,12 @@ SCENARIOS_GRAB = {
         "Chiều nay có vẻ may mắn hơn sáng. Cầu chạy đẹp quá.",
         "Em khoe với anh bạn cùng chạy xe về nhóm, nó không tin. Kệ thôi, ai có duyên người ấy hưởng.",
         "Chỉ mong ngày nào cũng được như hôm nay, chạy xe có tiền, vào nhóm cũng có tiền.",
-        "Sắp về nhà rồi, lòng vui phơi phới vì hôm nay lại là một ngày có lãi."
+        "Sắp về nhà rồi, lòng vui phơi phới vì hôm nay lại là một ngày có lãi.",
+        "Chiều cuối tuần kẹt xe quá anh em ạ. Tranh thủ lúc xe nhích từng chút một em lại vào hóng hớt với nhóm.",
+        "Vừa trả khách ở quận 1, đang kiếm đường về. Em vào xem có kèo nào thơm để có tiền xăng về không.",
+        "Mấy cuốc xe chiều nay toàn gặp khách khó tính, hơi buồn. Nhưng vào nhóm thấy mọi người là vui lại ngay.",
+        "Em vừa bị hủy chuyến, thôi thì coi như có thời gian rảnh để tập trung vào kèo của nhóm.",
+        "Tầm này là giờ cao điểm, em phải tập trung chạy. Có gì hay mọi người hú em với nhé."
     ],
     "evening": [
         "Em về tới phòng rồi! Tắm rửa xong là em vào chiến hết mình với anh em đây.",
@@ -100,7 +115,12 @@ SCENARIOS_GRAB = {
         "Ở đây em không chỉ kiếm được tiền, mà còn kiếm được niềm vui và sự sẻ chia.",
         "Mỗi một đồng em kiếm được từ nhóm, em đều cảm thấy nó rất ý nghĩa.",
         "Hy vọng một ngày nào đó, em có thể tự tin mời anh em trong nhóm một chầu cafe.",
-        "Thôi em đi ngủ đây. Yêu thương và biết ơn cả nhà mình rất nhiều."
+        "Thôi em đi ngủ đây. Yêu thương và biết ơn cả nhà mình rất nhiều.",
+        "Về tới phòng trọ là em mở ngay điện thoại vào với nhóm. Cả ngày mệt mỏi chỉ có đây là niềm vui.",
+        "Hôm nay tiền chạy xe không được bao nhiêu, tất cả hy vọng dồn vào buổi tối cùng anh em.",
+        "Em vừa ăn vội gói mì, giờ ngồi tập trung với mọi người đây.",
+        "Cả ngày nghe tiếng xe cộ ngoài đường, giờ về phòng được nghe tiếng 'húp' của anh em là thấy yên bình.",
+        "Tối là phải có tí tiền trong tài khoản mới ngủ ngon được. Nhờ cả vào các cao nhân."
     ],
     # --- Kịch bản đêm khuya: Chốt ngày và những lời tâm sự ---
     "late_night": [
@@ -113,7 +133,12 @@ SCENARIOS_GRAB = {
         "Em off đây. Mai lại dậy sớm cày cuốc. Hẹn gặp lại cả nhà.",
         "Nhờ nhóm, em đã trả hết được khoản nợ nhỏ trước đây. Cảm giác nhẹ cả người.",
         "Đúng là không có công việc nào là thấp hèn, chỉ cần mình nỗ lực. Nhóm đã cho em thêm niềm tin đó.",
-        "Chúc cả nhà ngủ ngon, mơ đẹp, mai lại húp rực rỡ."
+        "Chúc cả nhà ngủ ngon, mơ đẹp, mai lại húp rực rỡ.",
+        "Chốt sổ ngày hôm nay, em xin phép đi ngủ để mai cày tiếp. Cảm ơn cả nhà đã kéo em.",
+        "Hơn 11 giờ đêm rồi, em cũng thấm mệt. Chúc anh em ở lại gặt hái thêm nhiều thành công.",
+        "Ngày mai lại là một ngày mới, một cơ hội mới. Ngủ thôi cả nhà ơi.",
+        "Tổng kết hôm nay lời được bằng 2 ngày chạy xe. Đúng là lựa chọn quan trọng hơn nỗ lực.",
+        "Em xin phép đi ngủ để giữ gìn sức khỏe. Gửi lời chúc may mắn đến tất cả mọi người."
     ],
     # --- Kịch bản Tự vấn / Cảm ơn / Động lực: Nơi thể hiện rõ nhất cá tính nhân vật ---
     "experience_motivation": [
@@ -136,7 +161,12 @@ SCENARIOS_GRAB = {
         "Mỗi lần thắng, em không chỉ vui vì tiền, mà vui vì sự đoàn kết của nhóm.",
         "Em đang cố gắng tích góp để có một số vốn nhỏ, mở một cửa hàng. Ước mơ đó được nhen nhóm từ khi em vào đây.",
         "Cảm ơn, cảm ơn và cảm ơn! Em không biết nói gì hơn ngoài hai từ này.",
-        "Nhờ nhóm mà em dám nghĩ đến việc lấy vợ, xây dựng gia đình. Trước đây em không dám đâu."
+        "Nhờ nhóm mà em dám nghĩ đến việc lấy vợ, xây dựng gia đình. Trước đây em không dám đâu.",
+        "Nhiều khi nghĩ nếu không có nhóm, chắc giờ em vẫn đang loay hoay không biết tương lai đi về đâu. Thật sự biết ơn.",
+        "Đồng tiền kiếm được từ mồ hôi nước mắt chạy xe, và đồng tiền kiếm được từ trí tuệ của anh em trong nhóm. Cả hai đều đáng quý.",
+        "Em từng nghĩ đời mình cứ thế chạy xe ngoài đường mãi. Nhưng giờ em đã có mục tiêu rõ ràng hơn.",
+        "Mỗi lần mẹ gọi điện hỏi 'công việc dạo này tốt không con', em tự tin trả lời 'tốt lắm mẹ ạ'. Tất cả là nhờ có mọi người.",
+        "Em chỉ mong nhóm mình mãi vững mạnh, để những người khó khăn như em có một chỗ dựa."
     ],
     # --- Kịch bản tương tác: Luôn khiêm tốn, ham học hỏi và khen ngợi ---
     "interaction": [
@@ -159,7 +189,12 @@ SCENARIOS_GRAB = {
         "Em đang hơi phân vân, có ai cho em một lời khuyên được không?",
         "Nhìn mọi người thắng mà em có thêm động lực.",
         "Em sẽ ghi chép lại hết những kinh nghiệm này. Sổ tay làm giàu của em đây chứ đâu.",
-        "Cảm ơn mọi người đã luôn chào đón và giúp đỡ một người mới như em."
+        "Cảm ơn mọi người đã luôn chào đón và giúp đỡ một người mới như em.",
+        "Mọi người cho em hỏi thăm, tay này mình vào giờ có còn đẹp không ạ? Em cảm ơn.",
+        "Em thấy cầu này hơi lạ, có cao nhân nào phân tích giúp em với được không ạ?",
+        "Vốn em nhỏ, em theo 1/10 của các anh thôi ạ. Học hỏi là chính.",
+        "Anh C phân tích hay quá, em nghe mà vỡ ra bao nhiêu điều.",
+        "Cứ mỗi lần thấy thông báo của nhóm là em lại hồi hộp. Cảm ơn vì đã luôn mang đến cơ hội."
     ]
 }
 
@@ -182,5 +217,5 @@ def expand_scenarios(scenarios, factor=3):
         expanded[category] = list(set(new_messages)) # Dùng set để loại bỏ các câu trùng lặp
     return expanded
 
-# Tạo ra kho nội dung với hơn 500 câu
+# Tạo ra kho nội dung với số lượng lớn hơn
 SCENARIOS_GRAB = expand_scenarios(SCENARIOS_GRAB, 3)
