@@ -1,4 +1,4 @@
-# file: main_bot_grab.py (PHIÊN BẢN ĐÃ CẬP NHẬT)
+# file: main_bot_grab.py (PHIÊN BẢN GỠ LỖI)
 
 import telegram
 import asyncio
@@ -10,17 +10,15 @@ from dotenv import load_dotenv
 from kho_kich_ban_grab import SCENARIOS_GRAB
 from datetime import datetime, timedelta
 from collections import deque
-import pytz  # <<< THAY ĐỔI 1: THÊM THƯ VIỆN PURE-TZ >>>
+import pytz
 
 load_dotenv()
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 CHAT_ID = os.getenv("CHAT_ID")
 
-# <<< THAY ĐỔI 2: XÁC ĐỊNH MÚI GIỜ VIỆT NAM >>>
 VN_TZ = pytz.timezone('Asia/Ho_Chi_Minh')
 
-# Khung giờ hoạt động được giữ nguyên, logic kiểm soát chính nằm ở vòng lặp
 TIME_WINDOWS = {
     "morning": (6, 10),
     "noon": (12, 14),
@@ -57,7 +55,6 @@ def get_unique_random_message(category):
 
 async def send_message(message):
     try:
-        # <<< THAY ĐỔI 3: SỬ DỤNG GIỜ VIỆT NAM KHI IN LOG >>>
         now_vn = datetime.now(VN_TZ)
         await bot.send_message(chat_id=CHAT_ID, text=message)
         print(f"✅ [TÚ GRAB] [{now_vn.strftime('%H:%M:%S')}] Đã gửi: {message[:70]}...")
@@ -69,16 +66,16 @@ async def bot_main_loop():
     next_send_time = {}
     for category in SCENARIOS_GRAB.keys():
         delay = random.randint(MESSAGE_INTERVAL_MINUTES[0], MESSAGE_INTERVAL_MINUTES[1])
-        # <<< THAY ĐỔI 4: SỬ DỤNG GIỜ VIỆT NAM CHO TẤT CẢ LOGIC >>>
         next_send_time[category] = datetime.now(VN_TZ) + timedelta(minutes=delay)
 
     while True:
-        now = datetime.now(VN_TZ) # Luôn lấy giờ hiện tại theo múi giờ Việt Nam
+        now = datetime.now(VN_TZ)
         current_hour = now.hour
         current_minute = now.minute
 
-        # Logic "ngủ" của bot: Hoạt động từ 06:30 đến 23:30
-        # Tức là sẽ ngủ nếu: (giờ là 23 và phút > 30) HOẶC (giờ < 6) HOẶC (giờ là 6 và phút < 30)
+        # <<< THAY ĐỔI DUY NHẤT: THÊM DÒNG PRINT ĐỂ GỠ LỖI >>>
+        print(f"🐞 [DEBUG] Thời gian bot ghi nhận (VN): {now.strftime('%Y-%m-%d %H:%M:%S')}")
+
         is_sleeping_time = (current_hour == 23 and current_minute > 30) or \
                            current_hour < 6 or \
                            (current_hour == 6 and current_minute < 30)
