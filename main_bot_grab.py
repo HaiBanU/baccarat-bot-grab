@@ -1,4 +1,4 @@
-# file: main_bot_grab.py (PHIÊN BẢN GỠ LỖI)
+# file: main_bot_grab.py (PHIÊN BẢN TỐI ƯU CHO RENDER)
 
 import telegram
 import asyncio
@@ -10,15 +10,14 @@ from dotenv import load_dotenv
 from kho_kich_ban_grab import SCENARIOS_GRAB
 from datetime import datetime, timedelta
 from collections import deque
-import pytz
+# <<< THAY ĐỔI 1: KHÔNG CẦN PURE-TZ NỮA >>>
 
 load_dotenv()
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 CHAT_ID = os.getenv("CHAT_ID")
 
-VN_TZ = pytz.timezone('Asia/Ho_Chi_Minh')
-
+# Giữ nguyên, không thay đổi
 TIME_WINDOWS = {
     "morning": (6, 10),
     "noon": (12, 14),
@@ -55,9 +54,10 @@ def get_unique_random_message(category):
 
 async def send_message(message):
     try:
-        now_vn = datetime.now(VN_TZ)
+        # <<< THAY ĐỔI 2: DÙNG DATETIME.NOW() TRỰC TIẾP >>>
+        now = datetime.now()
         await bot.send_message(chat_id=CHAT_ID, text=message)
-        print(f"✅ [TÚ GRAB] [{now_vn.strftime('%H:%M:%S')}] Đã gửi: {message[:70]}...")
+        print(f"✅ [TÚ GRAB] [{now.strftime('%H:%M:%S')}] Đã gửi: {message[:70]}...")
     except Exception as e:
         print(f"❌ [TÚ GRAB] Lỗi khi gửi tin nhắn: {e}")
 
@@ -66,15 +66,17 @@ async def bot_main_loop():
     next_send_time = {}
     for category in SCENARIOS_GRAB.keys():
         delay = random.randint(MESSAGE_INTERVAL_MINUTES[0], MESSAGE_INTERVAL_MINUTES[1])
-        next_send_time[category] = datetime.now(VN_TZ) + timedelta(minutes=delay)
+        # <<< THAY ĐỔI 3: DÙNG DATETIME.NOW() TRỰC TIẾP >>>
+        next_send_time[category] = datetime.now() + timedelta(minutes=delay)
 
     while True:
-        now = datetime.now(VN_TZ)
+        # <<< THAY ĐỔI 4: DÙNG DATETIME.NOW() TRỰC TIẾP >>>
+        now = datetime.now()
         current_hour = now.hour
         current_minute = now.minute
 
-        # <<< THAY ĐỔI DUY NHẤT: THÊM DÒNG PRINT ĐỂ GỠ LỖI >>>
-        print(f"🐞 [DEBUG] Thời gian bot ghi nhận (VN): {now.strftime('%Y-%m-%d %H:%M:%S')}")
+        # Dòng debug này vẫn rất hữu ích, hãy giữ nó lại để kiểm tra
+        print(f"🐞 [DEBUG] Thời gian bot ghi nhận: {now.strftime('%Y-%m-%d %H:%M:%S')}")
 
         is_sleeping_time = (current_hour == 23 and current_minute > 30) or \
                            current_hour < 6 or \
